@@ -1,0 +1,923 @@
+# Copyright (C) Amitry
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Amitry Product & Category Slider for WooCommerce 4.0.0\n"
+"Report-Msgid-Bugs-To: https://amitry.de\n"
+"POT-Creation-Date: 2026-06-08 13:24+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: \n"
+"X-Generator: amitry-make-pot/1.0\n"
+"X-Domain: amitry-product-category-slider\n"
+
+#: amitry-product-category-slider.php:128
+#: includes/admin/class-wcsp-admin.php:55
+msgid "Settings"
+msgstr ""
+
+#: amitry-product-category-slider.php:137
+msgid "Get Pro"
+msgstr ""
+
+#: amitry-product-category-slider.php:66
+msgid "Amitry Product & Category Slider for WooCommerce requires WooCommerce. Please install and activate WooCommerce first."
+msgstr ""
+
+#: amitry-product-category-slider.php:67
+msgid "Plugin dependency missing"
+msgstr ""
+
+#: amitry-product-category-slider.php:85
+msgid "WooCommerce is not active. Please activate WooCommerce to use this plugin."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:102
+msgid "Amitry Product &amp; Category Slider"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:105
+msgid "A fast, modern, fully responsive slider for WooCommerce."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:147
+msgid "Products & Categories"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:148
+msgid "Show a slider of WooCommerce products or product categories - your choice per block."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:152
+msgid "Per-Device Settings"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:153
+msgid "Set slides per view, spacing, card scale, padding and arrow size separately for Desktop, Tablet and Mobile."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:157
+msgid "Two Card Designs"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:158
+msgid "Clean Card and Minimal styles, each with adjustable shadows, hover effects, radius and colors."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:162
+msgid "Smart Navigation"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:163
+msgid "Arrows, pagination dots, scrollbar, progress bar, slide counter and keyboard navigation - all toggleable."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:167
+msgid "Autoplay & Loop"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:168
+msgid "Optional autoplay with adjustable delay, pause-on-hover and seamless infinite looping."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:172
+msgid "Section Header & Button"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:173
+msgid "Add a styled section title, subtitle and a customizable \"View All\" button with icon."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:178
+msgid "Welcome to Amitry Slider"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:180
+msgid "A fast, modern, fully responsive slider for your WooCommerce products and categories - built as a native block with live preview."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:186
+msgid "New here? Head to the %s to add your first slider in under a minute."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:193
+msgid "Features"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:232
+msgid "Add the block"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:233
+msgid "Edit any page or post, click the + button and search for \"Amitry\". Insert the \"Category/Product Slider\" block."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:236
+msgid "Choose your data source"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:237
+msgid "In the block sidebar under \"Data Source\", pick Products or Categories. Set how many to show and which to include."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:240
+msgid "Adjust the layout"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:241
+msgid "Under \"Layout\", use the device tabs (Desktop / Tablet / Mobile) to set slides per view, spacing and card scale per device."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:244
+msgid "Preview each device"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:245
+msgid "Use the editor preview switcher (top toolbar) to see exactly how the slider looks on each screen size. The sidebar follows your selection."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:248
+msgid "Style your cards"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:249
+msgid "Open the Styles tab (the half-moon icon) to set the design, shadow, hover effect, colors, image shape and more."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:252
+msgid "Publish"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:253
+msgid "Hit Publish or Update. Your slider is live, responsive and touch-ready out of the box."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:258
+msgid "Quick Start Guide"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:273
+msgid "Tips"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:275
+msgid "Empty per-device values inherit from Desktop, so you only set what differs."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:276
+msgid "On mobile, arrows automatically move onto the image area to avoid covering text."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:277
+msgid "Use the \"Minimal\" design for a transparent, borderless look that blends with your theme."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:286
+msgid "Product & category sliders"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:287
+msgid "Per-device responsive settings"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:288
+msgid "Clean Card & Minimal designs"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:289
+msgid "Autoplay, loop & full navigation"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:290
+msgid "Section header & View All button"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:291
+msgid "Add to cart button"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:292
+msgid "Unlimited sliders"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:300
+msgid "Premium designs"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:302
+msgid "Overlay design"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:303
+msgid "Circle design"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:304
+msgid "3D Carousel design"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:305
+msgid "Masonry design"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:309
+msgid "Conversion"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:311
+msgid "AJAX add to cart (no reload)"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:312
+msgid "Quick View popup"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:313
+msgid "Custom badges (New, Bestseller)"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:314
+msgid "Hover image swap (second product image)"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:318
+msgid "Engagement"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:320
+msgid "Wishlist with dedicated page"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:321
+msgid "Sale countdown timer"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:322
+msgid "Stock bar (visual inventory level)"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:323
+msgid "\"Only X left in stock\" label"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:327
+msgid "Support"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:329
+msgid "Priority support"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:334
+msgid "Included"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:335
+msgid "Not included"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:340
+msgid "Everything in Free stays free. Pro unlocks premium designs and conversion-boosting features."
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:346
+msgid "Feature"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:347
+msgid "Free"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:348
+msgid "Pro"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:354
+msgid "Core (included in Free)"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:382
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:45
+#: includes/admin/class-wcsp-admin.php:46
+msgid "Amitry Slider"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:85
+msgid "Welcome & Features"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:86
+#: includes/admin/class-wcsp-admin.php:187
+msgid "Guide"
+msgstr ""
+
+#: includes/admin/class-wcsp-admin.php:87
+#: includes/admin/class-wcsp-admin.php:338
+msgid "Free vs Pro"
+msgstr ""
+
+#: includes/render/class-wcsp-card-category.php:83
+msgid "%d product"
+msgid_plural "%d products"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/render/class-wcsp-card-product.php:161
+msgid "-%d%%"
+msgstr ""
+
+#: includes/render/class-wcsp-card-product.php:164
+msgid "Sale"
+msgstr ""
+
+#: includes/render/class-wcsp-card-product.php:184
+msgid "Rated %s out of 5"
+msgstr ""
+
+#: includes/render/class-wcsp-card-product.php:215
+msgid "Only %d left"
+msgid_plural "Only %d left"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/render/class-wcsp-card-product.php:222
+msgid "In stock"
+msgstr ""
+
+#: includes/render/class-wcsp-card-product.php:225
+msgid "Out of stock"
+msgstr ""
+
+#: includes/render/class-wcsp-card-product.php:250
+msgid "Add to cart"
+msgstr ""
+
+#: includes/render/class-wcsp-card-product.php:253
+msgid "View product"
+msgstr ""
+
+#: includes/render/class-wcsp-card-product.php:43
+#: includes/render/class-wcsp-card-category.php:43
+msgid "View %s"
+msgstr ""
+
+#: includes/render/class-wcsp-renderer.php:567
+msgid "Previous"
+msgstr ""
+
+#: includes/render/class-wcsp-renderer.php:570
+msgid "Next"
+msgstr ""
+
+#: includes/render/class-wcsp-renderer.php:60
+msgid "Unknown slider type."
+msgstr ""
+
+#: includes/render/class-wcsp-renderer.php:614
+#: src/edit.js:1116
+msgid "View All"
+msgstr ""
+
+#: includes/render/class-wcsp-renderer.php:641
+msgid "Amitry Slider:"
+msgstr ""
+
+#: includes/render/class-wcsp-renderer.php:66
+#: src/edit.js:1352
+msgid "No items to display."
+msgstr ""
+
+#: includes/render/class-wcsp-renderer.php:72
+msgid "No card renderer available for this slider type."
+msgstr ""
+
+#: src/edit.js:1002
+msgid "Rating Stars"
+msgstr ""
+
+#: src/edit.js:1005
+msgid "Short Description"
+msgstr ""
+
+#: src/edit.js:1008
+msgid "Stock Status"
+msgstr ""
+
+#: src/edit.js:1011
+msgid "Add to Cart Button"
+msgstr ""
+
+#: src/edit.js:1021
+msgid "Category Description"
+msgstr ""
+
+#: src/edit.js:1028
+msgid "Section"
+msgstr ""
+
+#: src/edit.js:1029
+#: src/edit.js:1263
+msgid "Section Title"
+msgstr ""
+
+#: src/edit.js:1036
+msgid "Title Size (px)"
+msgstr ""
+
+#: src/edit.js:104
+msgid "Discover Pro"
+msgstr ""
+
+#: src/edit.js:1043
+msgid "Title Weight"
+msgstr ""
+
+#: src/edit.js:1046
+#: src/edit.js:1085
+msgid "Normal"
+msgstr ""
+
+#: src/edit.js:1047
+#: src/edit.js:1086
+#: src/edit.js:1190
+msgid "Medium"
+msgstr ""
+
+#: src/edit.js:1048
+#: src/edit.js:1087
+msgid "Bold"
+msgstr ""
+
+#: src/edit.js:1049
+msgid "Extra Bold"
+msgstr ""
+
+#: src/edit.js:105
+msgid "More designs, Quick-View, AJAX-Cart"
+msgstr ""
+
+#: src/edit.js:1055
+msgid "Title Alignment"
+msgstr ""
+
+#: src/edit.js:1058
+#: src/edit.js:1096
+#: src/edit.js:1132
+msgid "Left"
+msgstr ""
+
+#: src/edit.js:1059
+#: src/edit.js:1097
+#: src/edit.js:1133
+msgid "Center"
+msgstr ""
+
+#: src/edit.js:1060
+#: src/edit.js:1098
+#: src/edit.js:1134
+msgid "Right"
+msgstr ""
+
+#: src/edit.js:1068
+#: src/edit.js:1268
+msgid "Section Subtitle"
+msgstr ""
+
+#: src/edit.js:1075
+msgid "Subtitle Size (px)"
+msgstr ""
+
+#: src/edit.js:1082
+msgid "Subtitle Weight"
+msgstr ""
+
+#: src/edit.js:109
+msgid "Learn more"
+msgstr ""
+
+#: src/edit.js:1093
+msgid "Subtitle Alignment"
+msgstr ""
+
+#: src/edit.js:1106
+msgid "Show \"View All\" Button"
+msgstr ""
+
+#: src/edit.js:1111
+msgid "Button URL"
+msgstr ""
+
+#: src/edit.js:1114
+msgid "Button Text"
+msgstr ""
+
+#: src/edit.js:1119
+msgid "Position"
+msgstr ""
+
+#: src/edit.js:1122
+msgid "Below Slider"
+msgstr ""
+
+#: src/edit.js:1123
+msgid "Above Slider"
+msgstr ""
+
+#: src/edit.js:1129
+msgid "Alignment"
+msgstr ""
+
+#: src/edit.js:1140
+msgid "Icon"
+msgstr ""
+
+#: src/edit.js:1143
+#: src/edit.js:1188
+#: src/edit.js:1200
+msgid "None"
+msgstr ""
+
+#: src/edit.js:1144
+msgid "Arrow Right"
+msgstr ""
+
+#: src/edit.js:115
+msgid "Close banner"
+msgstr ""
+
+#: src/edit.js:1150
+#: src/edit.js:1210
+msgid "Border Radius (px)"
+msgstr ""
+
+#: src/edit.js:1157
+msgid "Padding (px)"
+msgstr ""
+
+#: src/edit.js:1170
+msgid "Card Style"
+msgstr ""
+
+#: src/edit.js:1172
+msgid "Design"
+msgstr ""
+
+#: src/edit.js:1177
+msgid "Clean Card"
+msgstr ""
+
+#: src/edit.js:1178
+msgid "Minimal"
+msgstr ""
+
+#: src/edit.js:1185
+msgid "Shadow"
+msgstr ""
+
+#: src/edit.js:1189
+msgid "Soft"
+msgstr ""
+
+#: src/edit.js:1191
+msgid "Strong"
+msgstr ""
+
+#: src/edit.js:1197
+msgid "Hover Effect"
+msgstr ""
+
+#: src/edit.js:1201
+msgid "Lift"
+msgstr ""
+
+#: src/edit.js:1202
+msgid "Zoom"
+msgstr ""
+
+#: src/edit.js:1203
+msgid "Shine"
+msgstr ""
+
+#: src/edit.js:1204
+msgid "Lift + Shine"
+msgstr ""
+
+#: src/edit.js:1217
+msgid "Card Padding (px)"
+msgstr ""
+
+#: src/edit.js:1232
+msgid "Colors"
+msgstr ""
+
+#: src/edit.js:1238
+msgid "Card Background"
+msgstr ""
+
+#: src/edit.js:1253
+msgid "Arrows - Symbol"
+msgstr ""
+
+#: src/edit.js:1258
+msgid "Arrows - Background"
+msgstr ""
+
+#: src/edit.js:1273
+msgid "View All Button - Background"
+msgstr ""
+
+#: src/edit.js:1278
+msgid "View All Button - Text"
+msgstr ""
+
+#: src/edit.js:1285
+msgid "Image Shape"
+msgstr ""
+
+#: src/edit.js:1288
+msgid "Square"
+msgstr ""
+
+#: src/edit.js:1289
+msgid "Rounded"
+msgstr ""
+
+#: src/edit.js:1290
+msgid "Circle"
+msgstr ""
+
+#: src/edit.js:1296
+msgid "Image Ratio"
+msgstr ""
+
+#: src/edit.js:1308
+msgid "Overlay Gradient on Image"
+msgstr ""
+
+#: src/edit.js:1317
+msgid "Size (px)"
+msgstr ""
+
+#: src/edit.js:1331
+msgid "Dots"
+msgstr ""
+
+#: src/edit.js:1332
+msgid "Shape"
+msgstr ""
+
+#: src/edit.js:1335
+msgid "Round"
+msgstr ""
+
+#: src/edit.js:1336
+msgid "Bar"
+msgstr ""
+
+#: src/edit.js:1357
+msgid "Loading preview..."
+msgstr ""
+
+#: src/edit.js:205
+msgid "Desktop"
+msgstr ""
+
+#: src/edit.js:206
+msgid "Tablet"
+msgstr ""
+
+#: src/edit.js:207
+msgid "Mobile"
+msgstr ""
+
+#: src/edit.js:278
+msgid "All Categories"
+msgstr ""
+
+#: src/edit.js:282
+msgid "1 selected"
+msgstr ""
+
+#: src/edit.js:285
+msgid "%d categories selected"
+msgstr ""
+
+#: src/edit.js:293
+msgid "Loading categories..."
+msgstr ""
+
+#: src/edit.js:325
+msgid "No categories available"
+msgstr ""
+
+#: src/edit.js:721
+msgid "Slider Type"
+msgstr ""
+
+#: src/edit.js:724
+#: src/edit.js:751
+msgid "Products"
+msgstr ""
+
+#: src/edit.js:730
+#: src/edit.js:752
+msgid "Categories"
+msgstr ""
+
+#: src/edit.js:746
+msgid "Data Source"
+msgstr ""
+
+#: src/edit.js:748
+msgid "Show"
+msgstr ""
+
+#: src/edit.js:761
+msgid "Filter"
+msgstr ""
+
+#: src/edit.js:764
+msgid "Newest"
+msgstr ""
+
+#: src/edit.js:765
+msgid "Best Selling"
+msgstr ""
+
+#: src/edit.js:766
+msgid "On Sale"
+msgstr ""
+
+#: src/edit.js:767
+msgid "Featured"
+msgstr ""
+
+#: src/edit.js:768
+msgid "Top Rated"
+msgstr ""
+
+#: src/edit.js:769
+msgid "Manual Selection"
+msgstr ""
+
+#: src/edit.js:770
+msgid "From Category"
+msgstr ""
+
+#: src/edit.js:777
+msgid "Number of Products"
+msgstr ""
+
+#: src/edit.js:786
+msgid "Manual product selection coming in the next version."
+msgstr ""
+
+#: src/edit.js:791
+msgid "From These Categories"
+msgstr ""
+
+#: src/edit.js:792
+msgid "Type to search and select. Empty = all."
+msgstr ""
+
+#: src/edit.js:803
+msgid "Max Categories"
+msgstr ""
+
+#: src/edit.js:810
+msgid "Sort Order"
+msgstr ""
+
+#: src/edit.js:813
+msgid "Name (A-Z)"
+msgstr ""
+
+#: src/edit.js:814
+#: src/edit.js:1018
+msgid "Product Count"
+msgstr ""
+
+#: src/edit.js:815
+msgid "Manual (Menu Order)"
+msgstr ""
+
+#: src/edit.js:821
+msgid "Hide Empty Categories"
+msgstr ""
+
+#: src/edit.js:827
+msgid "Exclude Categories"
+msgstr ""
+
+#: src/edit.js:828
+msgid "Type to search and select."
+msgstr ""
+
+#: src/edit.js:836
+msgid "Layout"
+msgstr ""
+
+#: src/edit.js:840
+msgid "Slides Per View"
+msgstr ""
+
+#: src/edit.js:857
+msgid "Space Between Slides (px)"
+msgstr ""
+
+#: src/edit.js:882
+msgid "Card Scale (%)"
+msgstr ""
+
+#: src/edit.js:895
+msgid "100% = default. Scales the entire card proportionally."
+msgstr ""
+
+#: src/edit.js:899
+msgid "Behavior"
+msgstr ""
+
+#: src/edit.js:901
+msgid "Autoplay"
+msgstr ""
+
+#: src/edit.js:909
+msgid "Autoplay Delay (ms)"
+msgstr ""
+
+#: src/edit.js:916
+msgid "Pause on Hover"
+msgstr ""
+
+#: src/edit.js:924
+msgid "Infinite Loop"
+msgstr ""
+
+#: src/edit.js:930
+msgid "Animation Speed (ms)"
+msgstr ""
+
+#: src/edit.js:937
+msgid "Touch Swipe on Mobile"
+msgstr ""
+
+#: src/edit.js:943
+msgid "Mouse Drag on Desktop"
+msgstr ""
+
+#: src/edit.js:950
+msgid "Navigation"
+msgstr ""
+
+#: src/edit.js:954
+#: src/edit.js:1315
+msgid "Arrows"
+msgstr ""
+
+#: src/edit.js:964
+msgid "Pagination Dots"
+msgstr ""
+
+#: src/edit.js:973
+msgid "Scrollbar"
+msgstr ""
+
+#: src/edit.js:976
+msgid "Progress Bar"
+msgstr ""
+
+#: src/edit.js:979
+msgid "Slide Counter"
+msgstr ""
+
+#: src/edit.js:982
+msgid "Keyboard Navigation"
+msgstr ""
+
+#: src/edit.js:987
+msgid "Card Content"
+msgstr ""
+
+#: src/edit.js:988
+#: src/edit.js:1283
+msgid "Image"
+msgstr ""
+
+#: src/edit.js:991
+#: src/edit.js:1243
+msgid "Title"
+msgstr ""
+
+#: src/edit.js:996
+#: src/edit.js:1248
+msgid "Price"
+msgstr ""
+
+#: src/edit.js:999
+msgid "Sale Badge"
+msgstr ""
+

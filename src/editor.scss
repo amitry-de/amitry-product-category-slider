@@ -1,0 +1,212 @@
+/**
+ * Editor-only styles.
+ *
+ * Loaded only inside the block editor (compiled to build/index.css).
+ */
+
+/* ── Pro upsell banner ── */
+.wcsp-pro-banner {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 12px;
+	margin: 0 16px 12px;
+	background: linear-gradient(135deg, #f0fdf4, #ecfeff);
+	border: 1px solid #d1fae5;
+	border-radius: 6px;
+	font-size: 12px;
+	line-height: 1.3;
+
+	&__text {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+
+		strong {
+			color: #047857;
+			font-weight: 600;
+		}
+
+		span {
+			color: #4b5563;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	&__link {
+		color: #047857;
+		font-weight: 600;
+		text-decoration: none;
+		white-space: nowrap;
+
+		&:hover,
+		&:focus {
+			color: #065f46;
+			text-decoration: underline;
+		}
+	}
+
+	&__close {
+		background: transparent;
+		border: 0;
+		font-size: 16px;
+		line-height: 1;
+		color: #6b7280;
+		cursor: pointer;
+		padding: 2px 4px;
+		border-radius: 3px;
+
+		&:hover {
+			color: #111827;
+			background: rgba(0, 0, 0, 0.05);
+		}
+	}
+}
+
+/* ── Editor wrapper around the preview ── */
+.wcsp-editor-wrapper {
+	min-height: 80px;
+}
+
+/* ── Inspector section labels (replacement for BaseControl groups) ── */
+.wcsp-section-label {
+	display: block;
+	margin: 16px 0 4px;
+	font-size: 11px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: #1e1e1e;
+}
+.wcsp-section-help {
+	display: block;
+	margin: 0 0 12px;
+	font-size: 12px;
+	font-style: normal;
+	color: #757575;
+	line-height: 1.4;
+}
+
+.wcsp-editor-empty,
+.wcsp-editor-loading {
+	padding: 24px 16px;
+	text-align: center;
+	color: #6b7280;
+	font-size: 13px;
+	border: 1px dashed #d1d5db;
+	border-radius: 4px;
+	background: #fafafa;
+}
+
+.wcsp-editor-loading {
+	color: #4b5563;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Editor-only fixes
+   ────────────────────────────────────────────────────────────────── */
+
+/* Cards keep their pointer events so :hover animations work in editor.
+   Click prevention is handled by JS in edit.js (preventDefault on <a>). */
+.wcsp-editor-wrapper .wcsp-card {
+	cursor: default;
+}
+
+/* Keep banner clicks alive. */
+.wcsp-editor-wrapper .wcsp-pro-banner,
+.wcsp-editor-wrapper .wcsp-pro-banner * {
+	pointer-events: auto;
+}
+
+/* Editor: arrows are visually present AND clickable.
+   They scroll the slider container horizontally (no Swiper in editor). */
+.wcsp-editor-wrapper .wcsp-slider .wcsp-btn {
+	opacity: 1;
+	pointer-events: auto;
+	cursor: pointer;
+}
+
+/* In the editor, allow horizontal scrolling so the arrow-click
+   delegation in edit.js can scroll the slider. Frontend uses Swiper. */
+.wcsp-editor-wrapper .wcsp-inner {
+	overflow-x: auto;
+	scroll-behavior: smooth;
+	scrollbar-width: none; /* Firefox */
+}
+.wcsp-editor-wrapper .wcsp-inner::-webkit-scrollbar {
+	display: none; /* Chromium/Safari */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Category multi-select dropdown (Inspector panel)
+   Turns the plain checkbox list into a polished, modern picker:
+   roomy clickable rows, hover + selected highlight, soft scrollbar.
+   ───────────────────────────────────────────────────────────── */
+
+/* Toggle button */
+.wcsp-cat-dropdown .components-button {
+	min-height: 36px;
+	border-radius: 6px;
+	font-weight: 500;
+}
+
+/* Popover panel */
+.wcsp-cat-dropdown__content {
+	border-radius: 10px;
+	overflow: hidden;
+
+	/* scrollable inner list (the inline-styled div from edit.js) */
+	> div {
+		padding: 6px !important;
+		scrollbar-width: thin;
+		scrollbar-color: #cdd6d1 transparent;
+	}
+	> div::-webkit-scrollbar {
+		width: 8px;
+	}
+	> div::-webkit-scrollbar-thumb {
+		background: #cdd6d1;
+		border-radius: 4px;
+	}
+	> div::-webkit-scrollbar-thumb:hover {
+		background: #b4c0ba;
+	}
+
+	/* each category row */
+	.components-checkbox-control {
+		margin: 0;
+		padding: 8px 10px;
+		border-radius: 8px;
+		transition: background 0.12s ease;
+	}
+	.components-checkbox-control:hover {
+		background: #f0f6f3;
+	}
+
+	/* highlight rows whose checkbox is selected */
+	.components-checkbox-control:has( .components-checkbox-control__input:checked ) {
+		background: #eaf7f0;
+	}
+
+	.components-checkbox-control__label {
+		font-size: 13px;
+		line-height: 1.3;
+		cursor: pointer;
+		color: #1e1e1e;
+	}
+	.components-checkbox-control__input-container,
+	.components-checkbox-control__input {
+		cursor: pointer;
+	}
+
+	/* "no categories" text */
+	> div > p {
+		padding: 6px 10px;
+	}
+}

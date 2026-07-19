@@ -1,0 +1,442 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "amitry-product-category-slider/slider",
+  "version": "4.3.0",
+  "title": "Amitry Product & Category Slider",
+  "category": "woocommerce",
+  "icon": "images-alt2",
+  "description": "Display WooCommerce products or product categories as a responsive, customizable slider.",
+  "keywords": [
+    "woocommerce",
+    "slider",
+    "carousel",
+    "product",
+    "category"
+  ],
+  "textdomain": "amitry-product-category-slider",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "example": {
+    "viewportWidth": 1200,
+    "attributes": {
+      "sliderType": "categories",
+      "slidesPerViewDesktop": 3,
+      "slidesPerViewTablet": 2,
+      "slidesPerViewMobile": 1
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "anchor": true,
+    "customClassName": true
+  },
+  "attributes": {
+    "sliderType": {
+      "type": "string",
+      "default": "categories"
+    },
+    "productFilter": {
+      "type": "string",
+      "default": "newest"
+    },
+    "productSortBy": {
+      "type": "string",
+      "default": "newest"
+    },
+    "selectedProducts": {
+      "type": "array",
+      "default": []
+    },
+    "productCount": {
+      "type": "number",
+      "default": 12
+    },
+    "selectedCategories": {
+      "type": "array",
+      "default": []
+    },
+    "excludeCategories": {
+      "type": "array",
+      "default": []
+    },
+    "onlyParent": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideEmpty": {
+      "type": "boolean",
+      "default": true
+    },
+    "maxCategories": {
+      "type": "number",
+      "default": 12
+    },
+    "categorySortBy": {
+      "type": "string",
+      "default": "name"
+    },
+    "slidesPerViewDesktop": {
+      "type": "number",
+      "default": 4
+    },
+    "slidesPerViewTablet": {
+      "type": "number",
+      "default": 2
+    },
+    "slidesPerViewMobile": {
+      "type": "number",
+      "default": 1
+    },
+    "scaleDesktop": {
+      "type": "number",
+      "default": 100
+    },
+    "scaleTablet": {
+      "type": "number",
+      "default": 100
+    },
+    "scaleMobile": {
+      "type": "number",
+      "default": 100
+    },
+    "spaceBetween": {
+      "type": "number",
+      "default": 24
+    },
+    "spaceBetweenTablet": {
+      "type": "number",
+      "default": -1
+    },
+    "spaceBetweenMobile": {
+      "type": "number",
+      "default": -1
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "autoplayDelay": {
+      "type": "number",
+      "default": 3000
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false
+    },
+    "pauseOnHover": {
+      "type": "boolean",
+      "default": true
+    },
+    "speed": {
+      "type": "number",
+      "default": 600
+    },
+    "transitionEffect": {
+      "type": "string",
+      "default": "slide"
+    },
+    "touchEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "mouseDrag": {
+      "type": "boolean",
+      "default": true
+    },
+    "showArrows": {
+      "type": "boolean",
+      "default": true
+    },
+    "showArrowsTablet": {
+      "type": "string",
+      "default": "inherit"
+    },
+    "showArrowsMobile": {
+      "type": "string",
+      "default": "inherit"
+    },
+    "showPaginationDots": {
+      "type": "boolean",
+      "default": false
+    },
+    "showPaginationDotsTablet": {
+      "type": "string",
+      "default": "inherit"
+    },
+    "showPaginationDotsMobile": {
+      "type": "string",
+      "default": "inherit"
+    },
+    "showScrollbar": {
+      "type": "boolean",
+      "default": false
+    },
+    "showProgress": {
+      "type": "boolean",
+      "default": false
+    },
+    "showCounter": {
+      "type": "boolean",
+      "default": false
+    },
+    "keyboardEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "showImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "showRating": {
+      "type": "boolean",
+      "default": false
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": false
+    },
+    "showAddToCart": {
+      "type": "boolean",
+      "default": false
+    },
+    "contentAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "maxWidth": {
+      "type": "number",
+      "default": 0
+    },
+    "showStock": {
+      "type": "boolean",
+      "default": false
+    },
+    "showSaleBadge": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCount": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": false
+    },
+    "styleVariant": {
+      "type": "string",
+      "default": "clean-card"
+    },
+    "imageShape": {
+      "type": "string",
+      "default": "rounded"
+    },
+    "imageFit": {
+      "type": "string",
+      "default": "cover"
+    },
+    "aspectRatio": {
+      "type": "string",
+      "default": "4-3"
+    },
+    "cardRadius": {
+      "type": "number",
+      "default": 16
+    },
+    "cardBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "cardPadding": {
+      "type": "number",
+      "default": 20
+    },
+    "cardPaddingTablet": {
+      "type": "number",
+      "default": -1
+    },
+    "cardPaddingMobile": {
+      "type": "number",
+      "default": -1
+    },
+    "shadowIntensity": {
+      "type": "string",
+      "default": "soft"
+    },
+    "hoverEffect": {
+      "type": "string",
+      "default": "lift"
+    },
+    "showOverlayGradient": {
+      "type": "boolean",
+      "default": false
+    },
+    "titleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "titleBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "priceColor": {
+      "type": "string",
+      "default": ""
+    },
+    "arrowColor": {
+      "type": "string",
+      "default": "#111827"
+    },
+    "arrowBgColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "arrowSize": {
+      "type": "number",
+      "default": 40
+    },
+    "arrowSizeTablet": {
+      "type": "number",
+      "default": -1
+    },
+    "arrowSizeMobile": {
+      "type": "number",
+      "default": -1
+    },
+    "arrowPosition": {
+      "type": "string",
+      "default": "inside"
+    },
+    "dotsColorActive": {
+      "type": "string",
+      "default": "#111827"
+    },
+    "dotsColorInactive": {
+      "type": "string",
+      "default": "#d1d5db"
+    },
+    "dotsShape": {
+      "type": "string",
+      "default": "round"
+    },
+    "sectionTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "sectionTitleSize": {
+      "type": "number",
+      "default": 24
+    },
+    "sectionTitleWeight": {
+      "type": "string",
+      "default": "bold"
+    },
+    "sectionTitleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "sectionTitleAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "sectionSubtitle": {
+      "type": "string",
+      "default": ""
+    },
+    "sectionSubtitleSize": {
+      "type": "number",
+      "default": 15
+    },
+    "sectionSubtitleWeight": {
+      "type": "string",
+      "default": "normal"
+    },
+    "sectionSubtitleColor": {
+      "type": "string",
+      "default": ""
+    },
+    "sectionSubtitleAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "showViewAllButton": {
+      "type": "boolean",
+      "default": false
+    },
+    "viewAllUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "viewAllText": {
+      "type": "string",
+      "default": ""
+    },
+    "viewAllPosition": {
+      "type": "string",
+      "default": "below"
+    },
+    "viewAllAlign": {
+      "type": "string",
+      "default": "right"
+    },
+    "viewAllBgColor": {
+      "type": "string",
+      "default": "#111827"
+    },
+    "viewAllTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "viewAllRadius": {
+      "type": "number",
+      "default": 6
+    },
+    "viewAllPadding": {
+      "type": "number",
+      "default": 10
+    },
+    "viewAllIcon": {
+      "type": "string",
+      "default": "arrow"
+    },
+    "viewAllFontSize": {
+      "type": "number",
+      "default": 14
+    },
+    "viewAllStyle": {
+      "type": "string",
+      "default": "filled"
+    },
+    "viewAllIconPosition": {
+      "type": "string",
+      "default": "right"
+    },
+    "viewAllBorderRadius": {
+      "type": "number",
+      "default": 6
+    },
+    "viewAllPaddingV": {
+      "type": "number",
+      "default": 10
+    },
+    "viewAllPaddingH": {
+      "type": "number",
+      "default": 24
+    }
+  }
+}

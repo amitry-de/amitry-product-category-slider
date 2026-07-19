@@ -1,0 +1,853 @@
+/**
+ * Frontend stylesheet for the Amitry Product & Category Slider.
+ *
+ * Architecture (Stage 4 fix):
+ *
+ *   .wcsp-outer        carries ALL visual classes and CSS custom
+ *                      properties. The editor's React component can
+ *                      override these instantly via a per-instance
+ *                      <style> tag without server roundtrip.
+ *
+ *   .wcsp-slider       only the slider/Swiper container. Stays clean
+ *                      of style classes.
+ *
+ * Visibility-toggles for elements are CSS-only via .wcsp-hide-{element}
+ * on .wcsp-outer, so toggling them in the editor is instant.
+ *
+ * CSS custom properties (set inline by the renderer or by the editor):
+ *
+ *   Layout - Desktop base values:
+ *   --wcsp-radius           16px
+ *   --wcsp-card-bg          #ffffff
+ *   --wcsp-card-pad         20px
+ *   --wcsp-gap              24px
+ *   --wcsp-arrow-size       44px
+ *
+ *   Per-device overrides (Tablet/Mobile, fall back to Desktop):
+ *   --wcsp-card-pad-tab     --wcsp-card-pad-mob
+ *   --wcsp-gap-tab          --wcsp-gap-mob
+ *   --wcsp-arrow-size-tab   --wcsp-arrow-size-mob
+ *
+ *   Per-device "current" vars (auto-switched by media queries; this is
+ *   what the actual rules read):
+ *   --wcsp-card-pad-current
+ *   --wcsp-gap-current
+ *   --wcsp-arrow-size-current
+ *   --wcsp-scale-current
+ *   --wcsp-arrow-top
+ *
+ *   Slides per view:
+ *   --wcsp-cols-dsk    --wcsp-cols-tab    --wcsp-cols-mob
+ *
+ *   Scale per device (1.0 = 100%):
+ *   --wcsp-scale-dsk   --wcsp-scale-tab   --wcsp-scale-mob
+ *
+ *   Colors:
+ *   --wcsp-arrow-bg
+ *   --wcsp-arrow-color
+ *   --wcsp-title-color    (optional, falls inherit)
+ *   --wcsp-price-color    (optional, falls inherit)
+ */
+
+/* ──────────────────────────────────────────────────────────────────
+   Box-sizing reset
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-outer,
+.wcsp-outer *,
+.wcsp-outer *::before,
+.wcsp-outer *::after {
+	box-sizing: border-box;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Section header
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-section-head {
+	margin: 0 0 20px;
+}
+.wcsp-section-title {
+	margin: 0 0 6px;
+	font-size: var(--wcsp-section-title-size, 1.5rem);
+	font-weight: var(--wcsp-section-title-weight, 700);
+	line-height: 1.2;
+	color: var(--wcsp-section-title-color, inherit);
+}
+.wcsp-section-subtitle {
+	margin: 0;
+	font-size: var(--wcsp-section-sub-size, 0.95rem);
+	font-weight: var(--wcsp-section-sub-weight, normal);
+	color: var(--wcsp-section-sub-color, #6b7280);
+	line-height: 1.5;
+}
+
+/* Per-element alignment (independent for title and subtitle). */
+.wcsp-outer.wcsp-title-align-left   .wcsp-section-title { text-align: left; }
+.wcsp-outer.wcsp-title-align-center .wcsp-section-title { text-align: center; }
+.wcsp-outer.wcsp-title-align-right  .wcsp-section-title { text-align: right; }
+.wcsp-outer.wcsp-sub-align-left   .wcsp-section-subtitle { text-align: left; }
+.wcsp-outer.wcsp-sub-align-center .wcsp-section-subtitle { text-align: center; }
+.wcsp-outer.wcsp-sub-align-right  .wcsp-section-subtitle { text-align: right; }
+
+/* Card content alignment (title, price, stock, excerpt, cart, rating). */
+.wcsp-outer.wcsp-content-align-left   .wcsp-content { text-align: left; }
+.wcsp-outer.wcsp-content-align-center .wcsp-content { text-align: center; }
+.wcsp-outer.wcsp-content-align-right  .wcsp-content { text-align: right; }
+/* Flex children (rating stars, cart) do not follow text-align, so steer
+   them with justify-content to match. */
+.wcsp-outer.wcsp-content-align-left   .wcsp-el--rating,
+.wcsp-outer.wcsp-content-align-left   .wcsp-el--cart { justify-content: flex-start; }
+.wcsp-outer.wcsp-content-align-center .wcsp-el--rating,
+.wcsp-outer.wcsp-content-align-center .wcsp-el--cart { justify-content: center; }
+.wcsp-outer.wcsp-content-align-right  .wcsp-el--rating,
+.wcsp-outer.wcsp-content-align-right  .wcsp-el--cart { justify-content: flex-end; }
+
+/* ──────────────────────────────────────────────────────────────────
+   Outer wrapper - default scale = desktop until media queries narrow
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-outer {
+	position: relative;
+	width: 100%;
+	/* Optional width cap (set per slider via --wcsp-max-w). The 100%
+	   fallback also hardens against overflowing the parent container. */
+	max-width: var( --wcsp-max-w, 100% );
+	margin-left: auto;
+	margin-right: auto;
+	--wcsp-scale-current: var(--wcsp-scale-dsk, 1);
+	--wcsp-gap-current: var(--wcsp-gap, 24px);
+	--wcsp-card-pad-current: var(--wcsp-card-pad, 20px);
+	--wcsp-arrow-size-current: var(--wcsp-arrow-size, 40px);
+	/* Vertical position of the navigation arrows. 50% = card middle.
+	   On smaller breakpoints we move them up to sit on the image area
+	   so they don't dominate the text content of the card. */
+	--wcsp-arrow-top: 50%;
+}
+
+@media (min-width: 1025px) {
+	.wcsp-outer {
+		--wcsp-scale-current: var(--wcsp-scale-dsk, 1);
+		--wcsp-gap-current: var(--wcsp-gap, 24px);
+		--wcsp-card-pad-current: var(--wcsp-card-pad, 20px);
+		--wcsp-arrow-size-current: var(--wcsp-arrow-size, 40px);
+		--wcsp-arrow-top: 50%;
+	}
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+	.wcsp-outer {
+		--wcsp-scale-current: var(--wcsp-scale-tab, 1);
+		--wcsp-gap-current: var(--wcsp-gap-tab, var(--wcsp-gap, 24px));
+		--wcsp-card-pad-current: var(--wcsp-card-pad-tab, var(--wcsp-card-pad, 20px));
+		--wcsp-arrow-size-current: var(--wcsp-arrow-size-tab, var(--wcsp-arrow-size, 40px));
+		/* Tablet: arrows sit on image area (upper third). */
+		--wcsp-arrow-top: 38%;
+	}
+}
+@media (max-width: 640px) {
+	.wcsp-outer {
+		--wcsp-scale-current: var(--wcsp-scale-mob, 1);
+		--wcsp-gap-current: var(--wcsp-gap-mob, var(--wcsp-gap, 24px));
+		--wcsp-card-pad-current: var(--wcsp-card-pad-mob, var(--wcsp-card-pad, 20px));
+		--wcsp-arrow-size-current: var(--wcsp-arrow-size-mob, var(--wcsp-arrow-size, 40px));
+		/* Mobile: same idea - arrows on image area. */
+		--wcsp-arrow-top: 38%;
+	}
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Slider container
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-slider {
+	position: relative;
+	width: 100%;
+	font-family: inherit;
+}
+
+/* The inner shrinks to scale% of available width and centers itself.
+   Uses overflow:hidden for true layout containment (no page-level
+   horizontal scroll when track is wider than viewport). Padding gives
+   moderate room for shadows; strongest shadow ('strong') may still
+   be slightly clipped at the container edge - accepted trade-off. */
+.wcsp-inner {
+	width: calc(100% * var(--wcsp-scale-current, 1));
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 12px 8px 20px;
+}
+
+.wcsp-track {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	/* Gap uses gap-current (per-device value) scaled by scale-current.
+	   This way both per-device gap config AND per-device scale work
+	   together cleanly. */
+	gap: calc(var(--wcsp-gap-current, 24px) * var(--wcsp-scale-current, 1));
+	width: 100%;
+}
+
+/* Slide width also scales: smaller cards = narrower columns = more
+   visible cards. The cols-count is the SAME, but each card is smaller
+   in proportion to scale. */
+.wcsp-slide {
+	/* Slide column width: based on cols and the scaled gap so that
+	   N slides + (N-1) scaled gaps always sum to exactly 100%.
+	   Uses gap-current (per-device value) so per-device gap config
+	   feeds into the layout math correctly. */
+	flex: 0 0 calc(
+		(100% - (var(--wcsp-cols-dsk, 4) - 1) * var(--wcsp-gap-current, 24px) * var(--wcsp-scale-current, 1))
+		/ var(--wcsp-cols-dsk, 4)
+	);
+	min-width: 0;
+}
+
+@media (max-width: 1024px) {
+	.wcsp-slide {
+		flex-basis: calc(
+			(100% - (var(--wcsp-cols-tab, 2) - 1) * var(--wcsp-gap-current, 24px) * var(--wcsp-scale-current, 1))
+			/ var(--wcsp-cols-tab, 2)
+		);
+	}
+}
+
+@media (max-width: 640px) {
+	.wcsp-slide {
+		flex-basis: calc(
+			(100% - (var(--wcsp-cols-mob, 1) - 1) * var(--wcsp-gap-current, 24px) * var(--wcsp-scale-current, 1))
+			/ var(--wcsp-cols-mob, 1)
+		);
+	}
+}
+
+/* Swiper takes over once frontend JS runs. */
+.wcsp-slider--js .wcsp-track {
+	gap: 0;
+}
+/* Disable our own flex-basis math when Swiper controls layout - Swiper
+   sets per-slide width inline based on slidesPerView and spaceBetween,
+   and our flex-basis would otherwise override its width. */
+.wcsp-slider--js .wcsp-slide {
+	flex: 0 0 auto;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Card
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	color: inherit;
+	text-decoration: none;
+	background: var(--wcsp-card-bg, #ffffff);
+	border-radius: var(--wcsp-radius, 16px);
+	transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wcsp-card,
+.wcsp-card:hover,
+.wcsp-card:focus,
+.wcsp-card:focus-visible,
+.wcsp-card:active,
+.wcsp-card:visited {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Inner links (image + title) - inherit styling, no underline */
+/* Specificity, not decoration, is the fight here. A bare
+   .wcsp-card__link scores 0-1-0 and loses to almost any theme. Astra
+   ships .ast-single-post .entry-content a at 0-2-1, which even beats a
+   two class scope. Three classes plus the element gives 0-3-1: above
+   every theme selector we have met, still no !important, so a site
+   owner who really wants underlined titles can still say so. */
+.wcsp-outer .wcsp-card a.wcsp-card__link,
+.wcsp-outer .wcsp-card a.wcsp-card__link:hover,
+.wcsp-outer .wcsp-card a.wcsp-card__link:focus,
+.wcsp-outer .wcsp-card a.wcsp-card__link:focus-visible,
+.wcsp-outer .wcsp-card a.wcsp-card__link:active,
+.wcsp-outer .wcsp-card a.wcsp-card__link:visited {
+	color: inherit;
+	text-decoration: none;
+	display: block;
+	box-shadow: none;
+}
+.wcsp-card__link--media {
+	/* Media link wraps the image area; behaves like a block. */
+	width: 100%;
+}
+.wcsp-card__link--text {
+	/* Title link should not stretch out the layout. */
+	display: block;
+}
+
+/* ── Style variants ── */
+
+.wcsp-outer.wcsp-style-clean-card .wcsp-card {
+	border: 1px solid #f0f0f5;
+}
+
+/* Minimal style: transparent BY DEFAULT, but respects user color if set.
+   The user's card background color (if any) becomes the value of
+   --wcsp-card-bg via inline style, which we read here with a fallback. */
+.wcsp-outer.wcsp-style-minimal .wcsp-card {
+	background: var(--wcsp-card-bg, transparent);
+	border: 0;
+	box-shadow: none;
+}
+.wcsp-outer.wcsp-style-minimal.wcsp-shadow-none .wcsp-card,
+.wcsp-outer.wcsp-style-minimal.wcsp-shadow-soft .wcsp-card,
+.wcsp-outer.wcsp-style-minimal.wcsp-shadow-medium .wcsp-card,
+.wcsp-outer.wcsp-style-minimal.wcsp-shadow-strong .wcsp-card {
+	box-shadow: none;
+}
+
+/* ── Shadow intensity ── */
+
+.wcsp-outer.wcsp-shadow-none   .wcsp-card { box-shadow: none; }
+.wcsp-outer.wcsp-shadow-soft   .wcsp-card { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07); }
+.wcsp-outer.wcsp-shadow-medium .wcsp-card { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.11); }
+.wcsp-outer.wcsp-shadow-strong .wcsp-card { box-shadow: 0 8px 40px rgba(0, 0, 0, 0.17); }
+
+/* ──────────────────────────────────────────────────────────────────
+   Hover effects
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-outer.wcsp-hover-lift .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_shine .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_zoom .wcsp-card:hover {
+	transform: translateY(-4px);
+}
+.wcsp-outer.wcsp-hover-lift.wcsp-shadow-soft   .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_shine.wcsp-shadow-soft .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_zoom.wcsp-shadow-soft .wcsp-card:hover {
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+}
+.wcsp-outer.wcsp-hover-lift.wcsp-shadow-medium .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_shine.wcsp-shadow-medium .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_zoom.wcsp-shadow-medium .wcsp-card:hover {
+	box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+}
+.wcsp-outer.wcsp-hover-lift.wcsp-shadow-strong .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_shine.wcsp-shadow-strong .wcsp-card:hover,
+.wcsp-outer.wcsp-hover-lift_zoom.wcsp-shadow-strong .wcsp-card:hover {
+	box-shadow: 0 16px 56px rgba(0, 0, 0, 0.24);
+}
+
+.wcsp-outer.wcsp-hover-zoom .wcsp-card:hover .wcsp-img-wrap img,
+.wcsp-outer.wcsp-hover-zoom .wcsp-card:hover .wcsp-img-wrap .wcsp-img,
+.wcsp-outer.wcsp-hover-lift_zoom .wcsp-card:hover .wcsp-img-wrap img,
+.wcsp-outer.wcsp-hover-lift_zoom .wcsp-card:hover .wcsp-img-wrap .wcsp-img {
+	transform: scale(1.06);
+}
+
+.wcsp-outer.wcsp-hover-shine .wcsp-card,
+.wcsp-outer.wcsp-hover-lift_shine .wcsp-card {
+	position: relative;
+}
+.wcsp-outer.wcsp-hover-shine .wcsp-card::after,
+.wcsp-outer.wcsp-hover-lift_shine .wcsp-card::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -75%;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(
+		120deg,
+		rgba(255, 255, 255, 0) 0%,
+		rgba(255, 255, 255, 0.45) 50%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	transform: skewX(-20deg);
+	pointer-events: none;
+	z-index: 3;
+	transition: left 0.85s ease;
+}
+.wcsp-outer.wcsp-hover-shine .wcsp-card:hover::after,
+.wcsp-outer.wcsp-hover-lift_shine .wcsp-card:hover::after {
+	left: 125%;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Media (image area)
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-media {
+	position: relative;
+	width: 100%;
+}
+
+.wcsp-img-wrap {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background: #f7f7fb;
+}
+
+/* Aspect ratios driven by .wcsp-outer */
+.wcsp-outer.wcsp-aspect-1-1  .wcsp-img-wrap { aspect-ratio: 1 / 1; }
+.wcsp-outer.wcsp-aspect-4-3  .wcsp-img-wrap { aspect-ratio: 4 / 3; }
+.wcsp-outer.wcsp-aspect-3-4  .wcsp-img-wrap { aspect-ratio: 3 / 4; }
+.wcsp-outer.wcsp-aspect-16-9 .wcsp-img-wrap { aspect-ratio: 16 / 9; }
+
+.wcsp-img-wrap img,
+.wcsp-img-wrap .wcsp-img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Uncropped image mode - shows the whole image on a neutral backdrop. */
+.wcsp-outer.wcsp-fit-contain .wcsp-img-wrap img,
+.wcsp-outer.wcsp-fit-contain .wcsp-img-wrap .wcsp-img {
+	object-fit: contain;
+}
+.wcsp-outer.wcsp-fit-contain .wcsp-img-wrap {
+	background: var( --wcsp-contain-bg, #fafafa );
+}
+
+/* Image shape - driven from .wcsp-outer */
+.wcsp-outer.wcsp-shape-rounded .wcsp-img-wrap { border-radius: var(--wcsp-radius, 12px); }
+.wcsp-outer.wcsp-shape-square  .wcsp-img-wrap { border-radius: 0; }
+.wcsp-outer.wcsp-shape-circle  .wcsp-img-wrap {
+	border-radius: 50%;
+	aspect-ratio: 1 / 1;
+	width: 80%;
+	margin: 12px auto;
+}
+
+/* Clean Card variant: bottom of image is square (meets content) */
+.wcsp-outer.wcsp-style-clean-card.wcsp-shape-rounded .wcsp-img-wrap {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.wcsp-outer.wcsp-style-clean-card.wcsp-shape-circle .wcsp-img-wrap {
+	border-radius: 50%;
+}
+
+.wcsp-img-fallback {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: radial-gradient(circle at 50% 42%, #f7f7fb 0%, #eef0f6 70%, #e9ebf2 100%);
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #c4c6d4;
+}
+
+.wcsp-outer.wcsp-overlay .wcsp-img-wrap::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 50%;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 100%);
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Content
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: var(--wcsp-card-pad-current, var(--wcsp-card-pad, 20px));
+}
+
+/* Minimal style: respects user padding too, just defaults to a smaller
+   value when nothing is set (12px instead of Clean Card's 20px). */
+.wcsp-outer.wcsp-style-minimal .wcsp-content {
+	padding: var(--wcsp-card-pad-current, var(--wcsp-card-pad, 12px));
+}
+
+/* Same fight for the heading: themes size .entry-content h3, and Astra
+   scopes it further still, so the card title needs the same reach. */
+.wcsp-outer .wcsp-card .wcsp-title {
+	margin: 0;
+	padding: 0;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.3;
+	letter-spacing: normal;
+	text-transform: none;
+	color: var(--wcsp-title-color, inherit);
+	overflow-wrap: break-word;
+	hyphens: auto;
+}
+
+.wcsp-outer .wcsp-card .wcsp-count,
+.wcsp-outer .wcsp-card .wcsp-excerpt {
+	margin: 0;
+	font-size: 0.8125rem;
+	color: #6b7280;
+	line-height: 1.4;
+}
+
+.wcsp-outer .wcsp-card .wcsp-price {
+	font-size: 0.9375rem;
+	font-weight: 700;
+	color: var(--wcsp-price-color, inherit);
+	line-height: 1.3;
+}
+.wcsp-outer .wcsp-card .wcsp-price del {
+	color: #9ca3af;
+	font-weight: 400;
+	font-size: 0.8125rem;
+	margin-right: 6px;
+}
+.wcsp-outer .wcsp-card .wcsp-price ins {
+	text-decoration: none;
+	color: #dc2626;
+}
+
+/* ── Rating ── */
+
+.wcsp-rating {
+	display: flex;
+	align-items: center;
+	gap: 1px;
+}
+.wcsp-rating--empty {
+	display: none; /* hide rating element entirely if no rating */
+}
+.wcsp-star {
+	font-size: 0.8125rem;
+	color: #d1d5db;
+	line-height: 1;
+}
+.wcsp-star--filled {
+	color: #f59e0b;
+}
+.wcsp-rating-num {
+	font-size: 0.6875rem;
+	color: #9ca3af;
+	margin-left: 4px;
+}
+
+/* ── Stock status ── */
+
+.wcsp-stock {
+	font-size: 0.75rem;
+	margin-top: 2px;
+}
+.wcsp-stock--in  { color: #059669; }
+.wcsp-stock--low { color: #d97706; }
+.wcsp-stock--out { color: #dc2626; }
+
+/* ── Sale badge ── */
+
+.wcsp-badge {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 2;
+	padding: 4px 10px;
+	border-radius: 4px;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	line-height: 1.4;
+	pointer-events: none;
+}
+.wcsp-badge--sale {
+	background: #dc2626;
+	color: #ffffff;
+}
+
+/* ── Add-to-cart button ── */
+
+/* Also an anchor, so also scoped. text-decoration is stated explicitly
+   because a theme underlining content links would otherwise underline
+   the button label. */
+.wcsp-outer .wcsp-card a.wcsp-cart-btn {
+	text-decoration: none;
+	display: inline-block;
+	margin-top: 8px;
+	padding: 8px 16px;
+	background: #111827;
+	color: #ffffff;
+	border: 0;
+	border-radius: 6px;
+	text-decoration: none;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-align: center;
+	cursor: pointer;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+.wcsp-outer .wcsp-card a.wcsp-cart-btn:hover,
+.wcsp-outer .wcsp-card a.wcsp-cart-btn:focus-visible {
+	text-decoration: none;
+	background: #374151;
+	color: #ffffff;
+	text-decoration: none;
+	transform: translateY(-1px);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Element hide-classes (instant editor toggling, no SSR roundtrip)
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-outer.wcsp-hide-image      .wcsp-el--image,
+.wcsp-outer.wcsp-hide-title      .wcsp-el--title,
+.wcsp-outer.wcsp-hide-price      .wcsp-el--price,
+.wcsp-outer.wcsp-hide-rating     .wcsp-el--rating,
+.wcsp-outer.wcsp-hide-excerpt    .wcsp-el--excerpt,
+.wcsp-outer.wcsp-hide-cart       .wcsp-el--cart,
+.wcsp-outer.wcsp-hide-stock      .wcsp-el--stock,
+.wcsp-outer.wcsp-hide-count      .wcsp-el--count,
+.wcsp-outer.wcsp-hide-sale-badge .wcsp-badge--sale {
+	display: none;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Navigation controls
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-btn {
+	position: absolute;
+	top: var(--wcsp-arrow-top, 50%);
+	transform: translateY(-50%);
+	z-index: 20;
+	width: var(--wcsp-arrow-size-current, var(--wcsp-arrow-size, 44px));
+	height: var(--wcsp-arrow-size-current, var(--wcsp-arrow-size, 44px));
+	border-radius: 50%;
+	border: 0;
+	background: var(--wcsp-arrow-bg, #ffffff);
+	color: var(--wcsp-arrow-color, #111827);
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.14);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.wcsp-btn svg {
+	width: calc(var(--wcsp-arrow-size-current, var(--wcsp-arrow-size, 44px)) * 0.4);
+	height: calc(var(--wcsp-arrow-size-current, var(--wcsp-arrow-size, 44px)) * 0.4);
+}
+.wcsp-btn--prev { left: 10px; }
+.wcsp-btn--next { right: 10px; }
+
+.wcsp-slider--js .wcsp-btn {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.wcsp-btn:hover {
+	transform: translateY(-50%) scale(1.05);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.wcsp-btn--disabled {
+	opacity: 0.35;
+	cursor: default;
+	pointer-events: none;
+}
+
+/* Per-device hide rules. Each media query toggles the matching class. */
+@media (min-width: 1025px) {
+	.wcsp-outer.wcsp-hide-arrows-dsk .wcsp-btn { display: none !important; }
+	.wcsp-outer.wcsp-hide-dots-dsk .wcsp-dots,
+	.wcsp-outer.wcsp-hide-dots-dsk .swiper-pagination { display: none !important; }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+	.wcsp-outer.wcsp-hide-arrows-tab .wcsp-btn { display: none !important; }
+	.wcsp-outer.wcsp-hide-dots-tab .wcsp-dots,
+	.wcsp-outer.wcsp-hide-dots-tab .swiper-pagination { display: none !important; }
+}
+@media (max-width: 640px) {
+	.wcsp-outer.wcsp-hide-arrows-mob .wcsp-btn { display: none !important; }
+	.wcsp-outer.wcsp-hide-dots-mob .wcsp-dots,
+	.wcsp-outer.wcsp-hide-dots-mob .swiper-pagination { display: none !important; }
+}
+
+/* Dots */
+.wcsp-dots {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	margin: 18px 0 0;
+	min-height: 12px;
+}
+.wcsp-dots .wcsp-dot,
+.wcsp-dots .swiper-pagination-bullet {
+	background: #d1d5db;
+	cursor: pointer;
+	border: 0;
+	padding: 0;
+	display: inline-block;
+	transition: background 0.2s ease, width 0.2s ease;
+	opacity: 1;
+}
+.wcsp-dots .wcsp-dot--active,
+.wcsp-dots .swiper-pagination-bullet-active {
+	background: #111827;
+}
+
+/* Round dots (default): small circle, active grows wider into a pill. */
+.wcsp-outer.wcsp-dots-round .wcsp-dots .wcsp-dot,
+.wcsp-outer.wcsp-dots-round .wcsp-dots .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+	border-radius: 99px;
+}
+.wcsp-outer.wcsp-dots-round .wcsp-dots .wcsp-dot--active,
+.wcsp-outer.wcsp-dots-round .wcsp-dots .swiper-pagination-bullet-active {
+	width: 22px;
+}
+
+/* Bar dots: rectangular bars, all the same width. */
+.wcsp-outer.wcsp-dots-bar .wcsp-dots .wcsp-dot,
+.wcsp-outer.wcsp-dots-bar .wcsp-dots .swiper-pagination-bullet {
+	width: 22px;
+	height: 4px;
+	border-radius: 2px;
+}
+
+/* Scrollbar */
+.wcsp-scrollbar {
+	height: 4px;
+	background: rgba(0, 0, 0, 0.06);
+	border-radius: 2px;
+	margin-top: 16px;
+	position: relative;
+}
+
+/* Progress bar - shows how far through the slider the user is.
+   Width of the inner bar is set by frontend.js based on Swiper's
+   progress value (0 .. 1). */
+.wcsp-progress {
+	height: 3px;
+	background: rgba(0, 0, 0, 0.08);
+	border-radius: 2px;
+	margin-top: 16px;
+	overflow: hidden;
+}
+.wcsp-progress__bar {
+	height: 100%;
+	width: 0%;
+	background: #111827;
+	border-radius: 2px;
+	transition: width 0.3s ease;
+}
+
+/* Counter (e.g. "2 / 8") */
+.wcsp-counter {
+	font-size: 0.8125rem;
+	color: #6b7280;
+	margin-top: 12px;
+	text-align: center;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   View All button
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-view-all {
+	display: flex;
+	margin-top: 20px;
+}
+
+/* Alignment of the button within its row. */
+.wcsp-outer.wcsp-viewall-align-left   .wcsp-view-all { justify-content: flex-start; }
+.wcsp-outer.wcsp-viewall-align-center .wcsp-view-all { justify-content: center; }
+.wcsp-outer.wcsp-viewall-align-right  .wcsp-view-all { justify-content: flex-end; }
+
+/* If positioned above the slider, swap margins (no top, give some bottom). */
+.wcsp-outer.wcsp-viewall-pos-above .wcsp-view-all {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.wcsp-outer .wcsp-view-all a.wcsp-view-all__link {
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: var(--wcsp-viewall-pad, 10px) calc(var(--wcsp-viewall-pad, 10px) * 2.4);
+	background: var(--wcsp-viewall-bg, #111827);
+	color: var(--wcsp-viewall-color, #ffffff);
+	text-decoration: none;
+	border-radius: var(--wcsp-viewall-radius, 6px);
+	font-size: 0.875rem;
+	font-weight: 600;
+	transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+.wcsp-outer .wcsp-view-all a.wcsp-view-all__link:hover,
+.wcsp-outer .wcsp-view-all a.wcsp-view-all__link:focus-visible {
+	text-decoration: none;
+	opacity: 0.92;
+	color: var(--wcsp-viewall-color, #ffffff);
+	text-decoration: none;
+	transform: translateY(-1px);
+}
+
+/* Icon visibility - hidden by default unless wcsp-viewall-icon-arrow-right
+   is set on the outer. */
+.wcsp-view-all__icon {
+	width: 16px;
+	height: 16px;
+	display: none;
+}
+.wcsp-outer.wcsp-viewall-icon-arrow-right .wcsp-view-all__icon {
+	display: inline-block;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Empty state (WP_DEBUG only)
+   ────────────────────────────────────────────────────────────────── */
+
+.wcsp-empty {
+	padding: 1em;
+	border: 1px dashed #ccc;
+	color: #666;
+	font-size: 0.9em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Reduced motion
+   Respect prefers-reduced-motion: disable hover lifts, the image
+   zoom and the shine sweep so the slider stays calm. Autoplay is
+   disabled separately in the frontend script.
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+	.wcsp-outer .wcsp-card,
+	.wcsp-outer .wcsp-img-wrap img,
+	.wcsp-outer .wcsp-img-wrap .wcsp-img,
+	.wcsp-outer .wcsp-card::after {
+		transition: none !important;
+	}
+
+	.wcsp-outer .wcsp-card:hover,
+	.wcsp-outer .wcsp-card:hover .wcsp-img-wrap img,
+	.wcsp-outer .wcsp-card:hover .wcsp-img-wrap .wcsp-img {
+		transform: none !important;
+	}
+
+	/* Remove the moving shine highlight entirely. */
+	.wcsp-outer.wcsp-hover-shine .wcsp-card::after,
+	.wcsp-outer.wcsp-hover-lift_shine .wcsp-card::after {
+		display: none !important;
+	}
+}
